@@ -1,26 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "/home/ruthenic/dev/SimuShell/SimuShell/SUCC.csproj": {}
+    "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\SUCC.csproj": {}
   },
   "projects": {
-    "/home/ruthenic/dev/SimuShell/SimuShell/SUCC.csproj": {
+    "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\SUCC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ruthenic/dev/SimuShell/SimuShell/SUCC.csproj",
+        "projectUniqueName": "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\SUCC.csproj",
         "projectName": "SUCC",
-        "projectPath": "/home/ruthenic/dev/SimuShell/SimuShell/SUCC.csproj",
-        "packagesPath": "/home/ruthenic/.nuget/packages/",
-        "outputPath": "/home/ruthenic/dev/SimuShell/SimuShell/obj/",
+        "projectPath": "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\SUCC.csproj",
+        "packagesPath": "C:\\Users\\Repsi0\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [
-          "/home/ruthenic/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Repsi0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -61,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

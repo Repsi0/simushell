@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "o/QXmk/+M8KQ07HFYQslodJWNlH/h0aySB1stAec2VwN59O2TJsrfy90L5WUR1MikzE3diO/kCqZUIZsgpXnSQ==",
+  "dgSpecHash": "kQMKO4L4q2rvXcnL5SSQloZINRQYPaJraGbRcv8zLb2Do4PKkL/jM/+CxSwMmpkDFekw55yDDTVUM40dse8xLg==",
   "success": true,
-  "projectFilePath": "/home/ruthenic/dev/SimuShell/SimuShell/SimuShell.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\SUCC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Repsi0\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Repsi0\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
+  ],
   "logs": []
 }
