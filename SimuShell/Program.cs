@@ -25,7 +25,7 @@ namespace SimuShell
             Console.Write(">");
             string currentcommand = (Console.ReadLine());
             // Execute command
-            CommandExec(ConvertToCommand(currentcommand), currentcommand);
+            CommandExec(ConvertToCommand(currentcommand));
         }
         public static void PrintValues(String[] myArr)
         {
