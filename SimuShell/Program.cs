@@ -37,7 +37,10 @@ namespace SimuShell
             string cmd = command[0]; // Get main command from command/args array.
             // Find command with matching name
             foreach(ShellCommand sc in commands) {
-                if (cmd == sc.cmdName) sc.Execute(command.Skip(1).ToArray()); // Execute, passing only the arguments (not command).
+                if (cmd == sc.cmdName) {
+                    sc.Execute(command.Skip(1).ToArray()); // Execute, passing only the arguments (not command).
+                    return;
+                }
             }
             Interpret();
         }
