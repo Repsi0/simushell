@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{6E74B767-37DF-4BCD-94E5-363FFA245BAA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SimuShell/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SimuShell/ShellCommand.cs">
     <Files>
-      <File FileName="SimuShell/Program.cs" Line="1" Column="1" />
+      <File FileName="SimuShell/Program.cs" Line="194" Column="17" />
+      <File FileName="SimuShell/ShellCommand.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SimuShell" expanded="True">
             <Node name="SimuShell" expanded="True">
-              <Node name="Program.cs" selected="True" />
+              <Node name="ShellCommand.cs" selected="True" />
             </Node>
+            <Node name="SUCC" expanded="True" />
           </Node>
         </State>
       </Pad>

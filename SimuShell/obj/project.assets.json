@@ -24,11 +24,10 @@
   },
   "libraries": {
     "Microsoft.CSharp/4.5.0": {
-      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
+      "sha512": "yWWeTbGCzBOlRPWDCIxiTZW1ecZiMbao0ZT97KKEWdBhrLvUqU8RdzkhzuCRQzvoxzxlR7vytO43OOgFdkxv6g==",
       "type": "package",
       "path": "microsoft.csharp/4.5.0",
       "files": [
-        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -92,11 +91,10 @@
       ]
     },
     "System.ValueTuple/4.5.0": {
-      "sha512": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
+      "sha512": "+gDrtQRdEsUSdPZEEcVRmBvs6xJmqGBqRzEGMQm5XqHxWTkZe/PSuomdth5ZPcOb/Oh2kIu6NChoI1JQk649jg==",
       "type": "package",
       "path": "system.valuetuple/4.5.0",
       "files": [
-        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -143,27 +141,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Repsi0\\.nuget\\packages\\": {}
+    "/home/repsi0/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\SUCC.csproj",
+      "projectUniqueName": "/home/repsi0/Projects/CSharp/simushell/SimuShell/SUCC.csproj",
       "projectName": "SUCC",
-      "projectPath": "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\SUCC.csproj",
-      "packagesPath": "C:\\Users\\Repsi0\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Repsi0\\Desktop\\Work\\Programming\\Repos\\Other People\\simushell\\SimuShell\\obj\\",
+      "projectPath": "/home/repsi0/Projects/CSharp/simushell/SimuShell/SUCC.csproj",
+      "packagesPath": "/home/repsi0/.nuget/packages/",
+      "outputPath": "/home/repsi0/Projects/CSharp/simushell/SimuShell/obj/",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "configFilePaths": [
-        "C:\\Users\\Repsi0\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/repsi0/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -198,13 +194,7 @@
           "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   }

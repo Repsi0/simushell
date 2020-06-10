@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\Repsi0\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Repsi0\\.nuget\\packages"
+      "/home/repsi0/.dotnet/store/|arch|/|tfm|",
+      "/home/repsi0/.nuget/packages"
     ]
   }
 }
