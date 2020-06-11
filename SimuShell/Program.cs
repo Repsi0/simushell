@@ -19,24 +19,42 @@ namespace SimuShell
         static bool ParseGreaterThan(string cmd, ConsoleRecord cr) {
             bool parsed = false;
             string[] appends = cmd.Split(">>");
-            if (appends.Length > 2 && appends[1].Trim() != "") {
+            bool overwriteLast = appends[appends.Length-1].Contains('>');
+            List<string> fin = new List<string>();
+            string[] allwrites;
+            foreach (string a in appends) {
+                foreach (string b in a.Split('>')) fin.Add(b.Trim());
+            }
+            allwrites = fin.ToArray();
+            if (allwrites.Length > 2 && allwrites[1].Trim() != "") {
                 // i starts at 1; we don't need the command part
-                for (int i = 1; i < appends.Length - 1; i++) { // Minus one because we are only creating nonexistent files right now
-                    string path = currentdir + appends[i].Trim();
+                for (int i = 1; i < allwrites.Length - 1; i++) { // Minus one because we are only creating nonexistent files right now
+                    string path = currentdir + allwrites[i].Trim();
                     if (!File.Exists(path)) File.Create(path);
                 }
-                StreamWriter sw = File.AppendText(currentdir + appends[appends.Length - 1].Trim());
-                sw.WriteLine(cr.text);
-                sw.Flush();
-                parsed = true;
-            } else  if(appends.Length == 2 && appends[1].Trim() != "") {
-                string path_complete = (appends[1].Trim().StartsWith('/')) ? appends[1].Trim() : currentdir + appends[1].Trim();
-                bool fileIsNew = !File.Exists(path_complete);
-                StreamWriter sw = File.AppendText(path_complete);
-                if (fileIsNew) sw.Write(cr.text);
-                else sw.Write('\n' + cr.text);
-                sw.Flush();
-                parsed = true;
+                string path_complete = (allwrites[allwrites.Length - 1].Trim().StartsWith('/')) ? allwrites[allwrites.Length - 1].Trim() : currentdir + allwrites[allwrites.Length - 1].Trim();
+                if (!overwriteLast) {
+                    StreamWriter sw = File.AppendText(path_complete);
+                    sw.WriteLine(cr.text);
+                    sw.Flush();
+                    parsed = true;
+                } else {
+                    File.WriteAllText(path_complete, cr.text);
+                    parsed = true;
+                }
+            } else  if(allwrites.Length == 2 && allwrites[1].Trim() != "") {
+                string path_complete = (allwrites[1].Trim().StartsWith('/')) ? allwrites[1].Trim() : currentdir + allwrites[1].Trim();
+                bool fileIsNew = (!File.Exists(path_complete)) | overwriteLast;
+                if (!overwriteLast) {
+                    StreamWriter sw = File.AppendText(path_complete);
+                    if (fileIsNew) sw.Write(cr.text);
+                    else sw.Write('\n' + cr.text);
+                    sw.Flush();
+                    parsed = true;
+                } else {
+                    File.WriteAllText(path_complete, cr.text);
+                    parsed = true;
+                }
             }
             return parsed;
         }
