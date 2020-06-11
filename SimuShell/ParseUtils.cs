@@ -14,6 +14,14 @@ namespace SimuShell
         // Adds currentdir to the beginning of directory if it doesn't start with a /
         public static string ConvToAbsoluteDirectory(string path) => path.Trim().StartsWith('/') ? path : ShellControl.currentdir + path.Trim();
 
+        public static long GetDirectorySize(string path)
+        {
+            string[] files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
+            long res = 0;
+            foreach (string file in files) res += new FileInfo(file).Length;
+            return res;
+        }
+
         public static bool ParseGreaterThan(string cmd, ConsoleRecord cr)
         { // Parse > and >>, for file output.
             bool parsed = false; // Bool to keep track of if there were any > or >>; later sent to CommandExec() to determine whether or not to also send to standard output
@@ -40,6 +48,7 @@ namespace SimuShell
                     StreamWriter sw = File.AppendText(path_complete); // Open a streamwriter in append mode
                     sw.WriteLine(cr.text); // Append a line of text
                     sw.Flush(); // Write / clear up memory
+                    sw.Close();
                     parsed = true;
                 }
                 else
@@ -51,13 +60,15 @@ namespace SimuShell
             else if (allwrites.Length == 2 && allwrites[1].Trim() != "")
             { // If we have exactly two sides of the command (echo blah >> test)
                 string path_complete = ConvToAbsoluteDirectory(allwrites[1]);
-                bool fileIsNew = (!File.Exists(path_complete)) | overwriteLast; // Is the file new?
+                bool fileIsNew = (!File.Exists(path_complete)); // Is the file new?
+                if(!fileIsNew) fileIsNew = File.ReadAllText(path_complete)=="";
                 if (!overwriteLast)
                 { // If we aren't overwriting...
                     StreamWriter sw = File.AppendText(path_complete); // Open in append mode
                     if (fileIsNew) sw.Write(cr.text); // Write text if it's new, otherwise...
                     else sw.Write('\n' + cr.text); // New line, then write text.
                     sw.Flush(); // Write / clear up memory
+                    sw.Close();
                     parsed = true;
                 }
                 else

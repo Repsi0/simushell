@@ -1,21 +1,22 @@
 ﻿<Properties StartupConfiguration="{6E74B767-37DF-4BCD-94E5-363FFA245BAA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SimuShell/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SimuShell/StringComparisons.cs">
     <Files>
-      <File FileName="SimuShell/Program.cs" Line="17" Column="10" />
+      <File FileName="SimuShell/Program.cs" Line="10" Column="10" />
       <File FileName="SimuShell/ShellCommand.cs" Line="10" Column="44" />
-      <File FileName="SimuShell/ConsoleRecord.cs" Line="31" Column="1" />
+      <File FileName="SimuShell/ConsoleRecord.cs" Line="28" Column="27" />
       <File FileName="SimuShell/CommandInput.cs" Line="11" Column="10" />
-      <File FileName="SimuShell/ConfigManager.cs" Line="36" Column="10" />
-      <File FileName="SimuShell/ParseUtils.cs" Line="15" Column="140" />
-      <File FileName="SimuShell/CommandRegistry.cs" Line="9" Column="9" />
-      <File FileName="SimuShell/ShellControl.cs" Line="4" Column="19" />
+      <File FileName="SimuShell/ConfigManager.cs" Line="33" Column="25" />
+      <File FileName="SimuShell/ParseUtils.cs" Line="33" Column="88" />
+      <File FileName="SimuShell/CommandRegistry.cs" Line="23" Column="29" />
+      <File FileName="SimuShell/ShellControl.cs" Line="17" Column="10" />
+      <File FileName="SimuShell/StringComparisons.cs" Line="4" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SimuShell" expanded="True">
             <Node name="SimuShell" expanded="True">
-              <Node name="Program.cs" selected="True" />
+              <Node name="StringComparisons.cs" selected="True" />
             </Node>
             <Node name="SUCC" expanded="True" />
           </Node>

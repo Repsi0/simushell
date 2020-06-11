@@ -49,7 +49,7 @@ namespace SimuShell
             }
             if (!hasMatchedAlready) record.Write(cmd + ": command not found");
             else sc_to_run.Execute(new CommandInput(command.Skip(1).ToArray(), record)); // Execute first command found, passing only the arguments (not command).
-            if (!ParseUtils.ParseGreaterThan(cmdStr, record) && record.ContainsText()) record.Post();
+            if (!ParseUtils.ParseGreaterThan(cmdStr, record) && (record.ContainsText() || record.willClear)) record.Post();
             return record;
         }
     }
