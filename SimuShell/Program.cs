@@ -29,10 +29,10 @@ namespace SimuShell
             if (allwrites.Length > 2 && allwrites[1].Trim() != "") { // If we have more than 2 sides of the command (for example: echo blah >> test > test2), and the first argument isn't blank
                 // i starts at 1; we don't need the command part
                 for (int i = 1; i < allwrites.Length - 1; i++) { // Minus one because we are only creating nonexistent files right now
-                    string path = allwrites[i].Trim().StartsWith('/') ? allwrites[i].Trim() : currentdir + allwrites[i].Trim(); // Get path -- if starts with /, don't append the supplied path to the current dir
+                    string path = ConvToAbsoluteDirectory(allwrites[i]); // Get path -- if starts with /, don't append the supplied path to the current dir
                     if (!File.Exists(path)) File.Create(path); // If the file doesn't exist, make it.
                 }
-                string path_complete = (allwrites[allwrites.Length - 1].Trim().StartsWith('/')) ? allwrites[allwrites.Length - 1].Trim() : currentdir + allwrites[allwrites.Length - 1].Trim();
+                string path_complete = ConvToAbsoluteDirectory(allwrites[allwrites.Length - 1]);
                 if (!overwriteLast) { // If we're appending..
                     StreamWriter sw = File.AppendText(path_complete); // Open a streamwriter in append mode
                     sw.WriteLine(cr.text); // Append a line of text
@@ -43,7 +43,7 @@ namespace SimuShell
                     parsed = true;
                 }
             } else if(allwrites.Length == 2 && allwrites[1].Trim() != "") { // If we have exactly two sides of the command (echo blah >> test)
-                string path_complete = (allwrites[1].Trim().StartsWith('/')) ? allwrites[1].Trim() : currentdir + allwrites[1].Trim();
+                string path_complete = ConvToAbsoluteDirectory(allwrites[1]);
                 bool fileIsNew = (!File.Exists(path_complete)) | overwriteLast; // Is the file new?
                 if (!overwriteLast) { // If we aren't overwriting...
                     StreamWriter sw = File.AppendText(path_complete); // Open in append mode
@@ -62,11 +62,15 @@ namespace SimuShell
             CommandExec(command);
             Interpret();
         }
+
         // Adds a / to the end of a directory if there isn't one
         static string FixDirectory (string path) => (path.EndsWith('/')) ? path : path + '/';
         // Converts directories from /home/{user}/ to /~/
         static string ConvDirectory(string path) => (!path.StartsWith("/home/"        + System.Environment.UserName.ToLowerInvariant(),StringComparison.InvariantCulture) ? path
                                                      : "~"+path.Remove(0, "/home/".Length + System.Environment.UserName.ToLowerInvariant().Length));
+        // Adds currentdir to the beginning of directory if it doesn't start with a /
+        static string ConvToAbsoluteDirectory(string path) => path.Trim().StartsWith('/') ? path : currentdir + path.Trim();
+
         // Registers a command, requiring the command's name, the function, and the manual entry.
         public static void RegisterCommand(string cmdName, Predicate<CommandInput> cmd, string manEntry) {
             commands.Add(new ShellCommand(cmdName, cmd));
