@@ -1,21 +1,21 @@
 ﻿<Properties StartupConfiguration="{6E74B767-37DF-4BCD-94E5-363FFA245BAA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SimuShell/ShellCommand.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SimuShell/Program.cs">
     <Files>
-      <File FileName="SimuShell/Program.cs" Line="94" Column="47" />
-      <File FileName="SimuShell/ShellCommand.cs" Line="8" Column="59" />
-      <File FileName="SimuShell/ConsoleRecord.cs" Line="22" Column="31" />
-      <File FileName="SimuShell/CommandInput.cs" Line="6" Column="30" />
+      <File FileName="SimuShell/Program.cs" Line="125" Column="24" />
+      <File FileName="SimuShell/ShellCommand.cs" Line="10" Column="44" />
+      <File FileName="SimuShell/ConsoleRecord.cs" Line="17" Column="9" />
+      <File FileName="SimuShell/CommandInput.cs" Line="11" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SimuShell" expanded="True">
-            <Node name="SimuShell" expanded="True" />
-            <Node name="SUCC" expanded="True">
-              <Node name="ShellCommand.cs" selected="True" />
-            </Node>
+            <Node name="SUCC" expanded="True" selected="True" />
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

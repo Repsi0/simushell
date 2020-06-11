@@ -30,8 +30,11 @@ namespace SimuShell
                 sw.Flush();
                 parsed = true;
             } else  if(appends.Length == 2 && appends[1].Trim() != "") {
-                StreamWriter sw = File.AppendText(currentdir + appends[1].Trim());
-                sw.Write(cr.text);
+                string path_complete = (appends[1].Trim().StartsWith('/')) ? appends[1].Trim() : currentdir + appends[1].Trim();
+                bool fileIsNew = !File.Exists(path_complete);
+                StreamWriter sw = File.AppendText(path_complete);
+                if (fileIsNew) sw.Write(cr.text);
+                else sw.Write('\n' + cr.text);
                 sw.Flush();
                 parsed = true;
             }
@@ -190,6 +193,19 @@ namespace SimuShell
                 input.cr.Write("Welcome to the SimuShell help prompt! Go away, this is under construction. GET OUT!");
                 return true;
             }, "show help text");
+            RegisterCommand("cat", (Predicate<CommandInput>)delegate (CommandInput input) {
+                string path = input.args[0].StartsWith('/') ? input.args[0] : currentdir + input.args[0];
+                if(Directory.Exists(path)) {
+                    input.cr.Write("cat: " + input.args[0] + ": Is a directory");
+                    return false;
+                } else if(File.Exists(path)) {
+                    input.cr.Write(File.ReadAllText(path));
+                    return true;
+                } else {
+                    input.cr.Write("cat: " + input.args[0] + ": No such file or directory");
+                    return false;
+                }
+            }, "concatenate files and print");
             // Enter the interpret loop
             Interpret();
         }
