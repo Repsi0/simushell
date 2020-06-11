@@ -16,43 +16,43 @@ namespace SimuShell
         public static string currentdir = "/";
         public static string visibledir = currentdir;
 
-        static bool ParseGreaterThan(string cmd, ConsoleRecord cr) {
-            bool parsed = false;
-            string[] appends = cmd.Split(">>");
-            bool overwriteLast = appends[appends.Length-1].Contains('>');
+        static bool ParseGreaterThan(string cmd, ConsoleRecord cr) { // Parse > and >>, for file output.
+            bool parsed = false; // Bool to keep track of if there were any > or >>; later sent to CommandExec() to determine whether or not to also send to standard output
+            string[] appends = cmd.Split(">>"); // Split by append operator
+            bool overwriteLast = appends[appends.Length-1].Contains('>'); // If the last file is actually two, separated by >, we are going to overwrite the 2nd one.
             List<string> fin = new List<string>();
             string[] allwrites;
-            foreach (string a in appends) {
+            foreach (string a in appends) { // Split further, by >
                 foreach (string b in a.Split('>')) fin.Add(b.Trim());
             }
-            allwrites = fin.ToArray();
-            if (allwrites.Length > 2 && allwrites[1].Trim() != "") {
+            allwrites = fin.ToArray(); // Convert back to array
+            if (allwrites.Length > 2 && allwrites[1].Trim() != "") { // If we have more than 2 sides of the command (for example: echo blah >> test > test2), and the first argument isn't blank
                 // i starts at 1; we don't need the command part
                 for (int i = 1; i < allwrites.Length - 1; i++) { // Minus one because we are only creating nonexistent files right now
-                    string path = currentdir + allwrites[i].Trim();
-                    if (!File.Exists(path)) File.Create(path);
+                    string path = allwrites[i].Trim().StartsWith('/') ? allwrites[i].Trim() : currentdir + allwrites[i].Trim(); // Get path -- if starts with /, don't append the supplied path to the current dir
+                    if (!File.Exists(path)) File.Create(path); // If the file doesn't exist, make it.
                 }
                 string path_complete = (allwrites[allwrites.Length - 1].Trim().StartsWith('/')) ? allwrites[allwrites.Length - 1].Trim() : currentdir + allwrites[allwrites.Length - 1].Trim();
-                if (!overwriteLast) {
-                    StreamWriter sw = File.AppendText(path_complete);
-                    sw.WriteLine(cr.text);
-                    sw.Flush();
+                if (!overwriteLast) { // If we're appending..
+                    StreamWriter sw = File.AppendText(path_complete); // Open a streamwriter in append mode
+                    sw.WriteLine(cr.text); // Append a line of text
+                    sw.Flush(); // Write / clear up memory
                     parsed = true;
                 } else {
-                    File.WriteAllText(path_complete, cr.text);
+                    File.WriteAllText(path_complete, cr.text); // Overwrite completely with text
                     parsed = true;
                 }
-            } else  if(allwrites.Length == 2 && allwrites[1].Trim() != "") {
+            } else if(allwrites.Length == 2 && allwrites[1].Trim() != "") { // If we have exactly two sides of the command (echo blah >> test)
                 string path_complete = (allwrites[1].Trim().StartsWith('/')) ? allwrites[1].Trim() : currentdir + allwrites[1].Trim();
-                bool fileIsNew = (!File.Exists(path_complete)) | overwriteLast;
-                if (!overwriteLast) {
-                    StreamWriter sw = File.AppendText(path_complete);
-                    if (fileIsNew) sw.Write(cr.text);
-                    else sw.Write('\n' + cr.text);
-                    sw.Flush();
+                bool fileIsNew = (!File.Exists(path_complete)) | overwriteLast; // Is the file new?
+                if (!overwriteLast) { // If we aren't overwriting...
+                    StreamWriter sw = File.AppendText(path_complete); // Open in append mode
+                    if (fileIsNew) sw.Write(cr.text); // Write text if it's new, otherwise...
+                    else sw.Write('\n' + cr.text); // New line, then write text.
+                    sw.Flush(); // Write / clear up memory
                     parsed = true;
                 } else {
-                    File.WriteAllText(path_complete, cr.text);
+                    File.WriteAllText(path_complete, cr.text); // Overwrite
                     parsed = true;
                 }
             }
@@ -62,14 +62,17 @@ namespace SimuShell
             CommandExec(command);
             Interpret();
         }
+        // Adds a / to the end of a directory if there isn't one
         static string FixDirectory (string path) => (path.EndsWith('/')) ? path : path + '/';
+        // Converts directories from /home/{user}/ to /~/
         static string ConvDirectory(string path) => (!path.StartsWith("/home/"        + System.Environment.UserName.ToLowerInvariant(),StringComparison.InvariantCulture) ? path
                                                      : "~"+path.Remove(0, "/home/".Length + System.Environment.UserName.ToLowerInvariant().Length));
+        // Registers a command, requiring the command's name, the function, and the manual entry.
         public static void RegisterCommand(string cmdName, Predicate<CommandInput> cmd, string manEntry) {
             commands.Add(new ShellCommand(cmdName, cmd));
             manPages += cmdName + " - " + manEntry + "\n";
         }
-
+        // Interpret command
         static void Interpret() {
             // Await next command
             visibledir = ConvDirectory(currentdir);
@@ -80,9 +83,7 @@ namespace SimuShell
             // Execute command
             ExecuteCommand_Major(currentcommand);
         }
-        public static void PrintValues(String[] myArr) {
-            foreach (String i in myArr) Console.WriteLine(i);
-        }
+        // Execute command
         public static ConsoleRecord CommandExec(string cmdStr) {
             ConsoleRecord record = new ConsoleRecord();
             string[] command = cmdStr.Split(' ');
@@ -106,6 +107,7 @@ namespace SimuShell
             if (!ParseGreaterThan(cmdStr, record) && record.ContainsText()) record.Post();
             return record;
         }
+        // Main function
         static void Main() {
             // Grab some information from SUCC
             string pH = Config.Get("LOGGING", "on");
@@ -232,14 +234,15 @@ namespace SimuShell
             Console.WriteLine("Test1 Works!");
         }*/
 
-        public static void SUCC_SET() { // Change SUCC settings
+        // Change SUCC settings
+        public static void SUCC_SET() {
             string[] options = new string[2]; // Size must be the number of settings in array
             options[0] = "LOGGING - LOG ALL COMMANDS WRITTEN";
             options[1] = "START-P - SHOW PROMPT AT START OF APP";
             bool exit=false;
             while(!exit) { // Loop until user exits
                 Console.Clear();
-                PrintValues(options);
+                foreach(string opt in options) Console.WriteLine(opt);
                 Console.WriteLine(""); // New line between selections and input
                 Console.Write("Select the option you would like to change (case sensitive), or type exit to exit: ");
                 string input = Console.ReadLine();
